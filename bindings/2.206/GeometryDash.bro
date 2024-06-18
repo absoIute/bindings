@@ -3004,6 +3004,8 @@ class EditorPauseLayer : CCBlockLayer, FLAlertLayerProtocol {
     CCMenuItemSpriteExtra* m_guidelinesOffButton;
     CCMenuItemSpriteExtra* m_guidelinesOnButton;
     LevelEditorLayer* m_editorLayer;
+	PAD = win 0x20;
+
 }
 
 [[link(android), depends(GJTransformState)]]
@@ -10436,31 +10438,58 @@ class LevelOptionsLayer2 : LevelOptionsLayer {
 [[link(android)]]
 class LevelPage : cocos2d::CCLayer, DialogDelegate {
 	// virtual ~LevelPage();
+	LevelPage() {}
 
-	static LevelPage* create(GJGameLevel*) = ios 0x40ac08;
+	static LevelPage* create(GJGameLevel* level) = win inline, ios 0x40ac08 {
+		auto ret = new LevelPage();
+		if (ret->init(level)) {
+			ret->autorelease();
+			return ret;
+		}
+		delete ret;
+		return nullptr;
+	}
 
-	TodoReturn addSecretCoin();
-	TodoReturn addSecretDoor();
+	void addSecretCoin() = win 0x2fbe20;
+	void addSecretDoor() = win 0x2fc530;
 	bool init(GJGameLevel*) = win 0x2f9570, imac 0x43f130, m1 0x3b145c;
 	void onInfo(cocos2d::CCObject* sender) = win 0x2fd820;
 	void onMoreGames(cocos2d::CCObject* sender);
 	void onPlay(cocos2d::CCObject* sender) = win 0x2fd2e0, imac 0x43e730, m1 0x3b0b5c, ios 0x40c32c;
-	void onSecretDoor(cocos2d::CCObject* sender);
+	void onSecretDoor(cocos2d::CCObject* sender) = win 0x2fc740;
 	void onTheTower(cocos2d::CCObject* sender) = win 0x2fb760;
-	TodoReturn playCoinEffect();
-	TodoReturn playStep2();
+	void playCoinEffect() = win 0x2fc060;
+	void playStep2() = win 0x2fd640;
 	void playStep3() = win 0x2fd720;
 	void updateDynamicPage(GJGameLevel*) = win 0x2fa200, imac 0x43c820, m1 0x3aecd4;
 
 	virtual bool ccTouchBegan(cocos2d::CCTouch*, cocos2d::CCEvent*) = win 0x2fdcc0, m1 0x3b3518, imac 0x441430;
 	virtual void ccTouchMoved(cocos2d::CCTouch*, cocos2d::CCEvent*) {}
 	virtual void ccTouchEnded(cocos2d::CCTouch*, cocos2d::CCEvent*) {}
-	virtual void ccTouchCancelled(cocos2d::CCTouch*, cocos2d::CCEvent*) = m1 0x3b3630, imac 0x441590;
-	virtual void registerWithTouchDispatcher() = m1 0x3b364c, imac 0x4415d0;
+	virtual void ccTouchCancelled(cocos2d::CCTouch*, cocos2d::CCEvent*) = win 0x6fd20, m1 0x3b3630, imac 0x441590;
+	virtual void registerWithTouchDispatcher() = win 0x99990, m1 0x3b364c, imac 0x4415d0;
 	virtual void dialogClosed(DialogLayer*) = win 0x2fd200, m1 0x3b3254, imac 0x441180;
 
 	bool m_isBusy;
 	GJGameLevel* m_level;
+	cocos2d::CCMenu* m_levelMenu;
+	cocos2d::extension::CCScale9Sprite* m_levelDisplay;
+	cocos2d::CCLabelBMFont* m_normalProgressLabel;
+	cocos2d::CCLabelBMFont* m_practiceProgressLabel;
+	cocos2d::CCLabelBMFont* m_nameLabel;
+	cocos2d::CCLabelBMFont* m_starsLabel;
+	float m_progressWidth;
+	cocos2d::CCSprite* m_normalProgressBar;
+	cocos2d::CCSprite* m_practiceProgressBar;
+	cocos2d::CCSprite* m_difficultySprite;
+	cocos2d::CCSprite* m_starsSprite;
+	cocos2d::CCSize m_levelDisplaySize;
+	cocos2d::CCArray* m_coins;
+	cocos2d::CCArray* m_dynamicObjects;
+	cocos2d::CCArray* m_levelObjects;
+	cocos2d::CCArray* m_progressObjects;
+	GameObject* m_coinObject;
+	cocos2d::CCSprite* m_secretDoor;
 }
 
 [[link(android)]]
@@ -15670,7 +15699,7 @@ class SongSelectNode : cocos2d::CCNode, FLAlertLayerProtocol, CustomSongLayerDel
 	void onSongMode(int);
 	TodoReturn selectSong(int);
 	void showCustomSongSelect();
-	void updateAudioLabel();
+	void updateAudioLabel() = win 0xc4bc0;
 	TodoReturn updateWidgetVisibility();
 
 	virtual void FLAlert_Clicked(FLAlertLayer*, bool) = win 0xc51e0, m1 0x1c5254, imac 0x2142e0;
@@ -15679,6 +15708,8 @@ class SongSelectNode : cocos2d::CCNode, FLAlertLayerProtocol, CustomSongLayerDel
 	virtual TodoReturn getActiveSongID() = win 0xc52b0, m1 0x1c53c4, imac 0x214450;
 	virtual TodoReturn getSongFileName() = win 0xc52c0, m1 0x1c53d4, imac 0x214470;
 	virtual LevelSettingsObject* getLevelSettings() = win 0xc5380, m1 0x1c550c, imac 0x2145b0;
+
+	int m_selectedSongID;
 }
 
 [[link(android)]]
@@ -16301,14 +16332,14 @@ class UILayer : cocos2d::CCLayerColor {
 	TodoReturn editorPlaytest(bool);
 	void enableEditorMode();
 	TodoReturn enableMenu() = imac 0x4d34a0;
-	void handleKeypress(cocos2d::enumKeyCodes, bool) = win 0x4a0b80, m1 0x43103c;
+	void handleKeypress(cocos2d::enumKeyCodes, bool) = win 0x4a0b80, m1 0x43103c, imac 0x4d2d40;
 	bool init(GJBaseGameLayer*) = win 0x49fe60, imac 0x4d1a70, m1 0x42fe64;
 	bool isJumpButtonPressed(bool) = m1 0x431774;
 	void onCheck(cocos2d::CCObject* sender);
 	void onDeleteCheck(cocos2d::CCObject* sender);
 	void onPause(cocos2d::CCObject* sender) = win 0x4a1300;
-	TodoReturn processUINodesTouch(GJUITouchEvent, cocos2d::CCTouch*); //was set to win 0x312bf0 but thats in the middle of a function
-	TodoReturn processUINodeTouch(GJUITouchEvent, int, cocos2d::CCPoint, GJUINode*) = win 0x4a1810;
+	void processUINodesTouch(GJUITouchEvent, cocos2d::CCTouch*); //was set to win 0x312bf0 but thats in the middle of a function
+	void processUINodeTouch(GJUITouchEvent, int, cocos2d::CCPoint, GJUINode*) = win 0x4a1810;
 	TodoReturn refreshDpad();
 	void resetAllButtons() = imac 0x4d3600, m1 0x431688;
 	void resetUINodeState() = win 0x4a09e0, m1 0x430d58;
