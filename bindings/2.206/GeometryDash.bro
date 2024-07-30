@@ -13567,7 +13567,7 @@ class RingObject : EffectGameObject {
 	virtual void customObjectSetup(gd::vector<gd::string>&, gd::vector<void*>&) = m1 0x16df74, imac 0x1af5c0;
 	virtual gd::string getSaveString(GJBaseGameLayer*) = m1 0x16e080, imac 0x1af710;
 	virtual void setRScale(float) = m1 0x16df30, imac 0x1af560;
-	virtual void triggerActivated(float) = m1 0x16dd88, imac 0x1af3b0;
+	virtual void triggerActivated(float) = win 0x48D650, m1 0x16dd88, imac 0x1af3b0;
 	virtual TodoReturn shouldDrawEditorHitbox() = m1 0x16df64, imac 0x1af5a0;
 	virtual TodoReturn powerOnObject(int) = m1 0x16dd94, imac 0x1af3c0;
 
