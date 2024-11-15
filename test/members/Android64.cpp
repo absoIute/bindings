@@ -51,14 +51,14 @@ GEODE_MEMBER_CHECK(GJBaseGameLayer, m_audioVisualizerBG, 0x35f0);
 GEODE_MEMBER_CHECK(GJBaseGameLayer, m_loadingLayer, 0x3668);
 
 
-GEODE_SIZE_CHECK(PlayLayer, 0x3970);
+GEODE_SIZE_CHECK(PlayLayer, 0x3978);
 GEODE_MEMBER_CHECK(PlayLayer, m_circleWaveArray, 0x37b0);
 GEODE_MEMBER_CHECK(PlayLayer, m_attemptLabel, 0x37d0);
 GEODE_MEMBER_CHECK(PlayLayer, m_progressBar, 0x37e8);
 GEODE_MEMBER_CHECK(PlayLayer, m_jumps, 0x3860);
 GEODE_MEMBER_CHECK(PlayLayer, m_hasCompletedLevel, 0x386d);
-GEODE_MEMBER_CHECK(PlayLayer, m_isPaused, 0x38d7);
-GEODE_MEMBER_CHECK(PlayLayer, m_infoLabel, 0x38e0);
+GEODE_MEMBER_CHECK(PlayLayer, m_isPaused, 0x38df);
+GEODE_MEMBER_CHECK(PlayLayer, m_infoLabel, 0x38e8);
 
 GEODE_SIZE_CHECK(DrawGridLayer, 0x260);
 GEODE_MEMBER_CHECK(DrawGridLayer, m_editorLayer, 0x200);
@@ -115,7 +115,7 @@ GEODE_MEMBER_CHECK(FMODAudioEngine, m_system, 0x218);
 
 GEODE_SIZE_CHECK(SimplePlayer, 0x2a8);
 GEODE_SIZE_CHECK(EnhancedGameObject, 0x598);
-// GEODE_SIZE_CHECK(EffectGameObject, 0x720);
+GEODE_SIZE_CHECK(EffectGameObject, 0x720);
 
 GEODE_MEMBER_CHECK(GameObject, m_hasExtendedCollision, 0x27c);
 GEODE_MEMBER_CHECK(GameObject, m_activeMainColorID, 0x290);
@@ -195,6 +195,8 @@ GEODE_MEMBER_CHECK(GJShaderState, m_prevTime, 0x78);
 GEODE_MEMBER_CHECK(ShaderLayer, m_shader, 0x458);
 GEODE_MEMBER_CHECK(ShaderLayer, m_gameLayer, 0x480);
 GEODE_MEMBER_CHECK(ShaderLayer, m_splitYRangeMultUniform, 0x63c);
+
+GEODE_MEMBER_CHECK(SetupInstantCountPopup, m_itemID, 0x3e0);
 
 GEODE_SIZE_CHECK(CCLightFlash, 0x168);
 GEODE_SIZE_CHECK(CCLightStrip, 0x160);

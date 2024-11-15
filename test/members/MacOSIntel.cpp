@@ -37,7 +37,7 @@ GEODE_MEMBER_CHECK(PlayLayer, m_coinArray, 0x3508);
 GEODE_MEMBER_CHECK(PlayLayer, m_unkSomeFloat, 0x35a4);
 GEODE_MEMBER_CHECK(PlayLayer, m_hasCompletedLevel, 0x368D);
 GEODE_MEMBER_CHECK(PlayLayer, m_endLayerStars, 0x3694);
-GEODE_MEMBER_CHECK(PlayLayer, m_isPaused, 0x36F7);
+GEODE_MEMBER_CHECK(PlayLayer, m_isPaused, 0x36FF);
 
 // // GameManager
 // GEODE_MEMBER_CHECK(GameManager, m_playLayer, 0x180);
@@ -57,6 +57,9 @@ GEODE_MEMBER_CHECK(PlayLayer, m_isPaused, 0x36F7);
 // GEODE_MEMBER_CHECK(GameObject, m_baseColor, 0x410);
 // GEODE_MEMBER_CHECK(GameObject, m_groups, 0x458);
 // GEODE_MEMBER_CHECK(GameObject, m_effectManager, 0x4d8);
+
+GEODE_SIZE_CHECK(EnhancedGameObject, 0x5a8);
+GEODE_SIZE_CHECK(EffectGameObject, 0x730);
 
 // // EffectGameObject
 // GEODE_MEMBER_CHECK(EffectGameObject, m_duration, 0x4f0);
