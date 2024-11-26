@@ -1602,7 +1602,7 @@ class cocos2d::CCDirector : cocos2d::CCObject, cocos2d::TypeInfo {
     cocos2d::CCPoint getVisibleOrigin();
     cocos2d::CCSize getVisibleSize();
     cocos2d::CCSize getWinSize() = imac 0x470920, m1 0x3df874;
-    cocos2d::CCSize getWinSizeInPixels();
+    cocos2d::CCSize getWinSizeInPixels() = imac 0x471080, m1 0x3dfeb4;
     float getZEye();
     //getScreenTop = ios 0x18260c, idk if i should add the function
     //getScreenBottom() = ios 0x182614
@@ -1645,7 +1645,7 @@ class cocos2d::CCDirector : cocos2d::CCObject, cocos2d::TypeInfo {
     bool isSendCleanupToScene();
     int levelForSceneInStack(cocos2d::CCScene*);
     void pause();
-    void popScene();
+    void popScene() = imac 0x471430, m1 0x3e025c;
     bool popSceneWithTransition(float, cocos2d::PopTransition) = imac 0x4714c0, m1 0x3e02e8;
     void popToRootScene();
     void popToSceneInStack(cocos2d::CCScene*);
@@ -1743,7 +1743,7 @@ class cocos2d::CCSequence : cocos2d::CCActionInterval {
 [[link(win, android)]]
 class cocos2d::CCSprite : cocos2d::CCNodeRGBA, cocos2d::CCTextureProtocol {
     static cocos2d::CCSprite* create(char const*) = imac 0x276440, m1 0x2210dc;
-    static cocos2d::CCSprite* create(char const*, cocos2d::CCRect const&) = imac 0x276530;
+    static cocos2d::CCSprite* create(char const*, cocos2d::CCRect const&) = imac 0x276530, m1 0x50a7e4;
     static cocos2d::CCSprite* create() = imac 0x276760, m1 0x2213ec;
     static cocos2d::CCSprite* createWithSpriteFrame(cocos2d::CCSpriteFrame*) = imac 0x276630, m1 0x2212d0;
     static cocos2d::CCSprite* createWithSpriteFrameName(char const*) = m1 0x2213c4, imac 0x276730;
@@ -2013,7 +2013,7 @@ class cocos2d::CCArray : cocos2d::CCObject {
     void exchangeObject(cocos2d::CCObject*, cocos2d::CCObject*);
     void exchangeObjectAtIndex(unsigned int, unsigned int);
     // void fastRemoveObject(cocos2d::CCObject*);
-    void fastRemoveObjectAtIndex(unsigned int) = m1 0xbab598;
+    void fastRemoveObjectAtIndex(unsigned int) = imac 0x709f10, m1 0x629530;
     void fastRemoveObjectAtIndexChild(unsigned int);
     void fastRemoveObjectAtIndexNew(unsigned int);
     unsigned int indexOfObject(cocos2d::CCObject*) const;
@@ -2110,7 +2110,7 @@ class cocos2d::CCRenderTexture : cocos2d::CCNode {
     bool isAutoDraw() const;
     void listenToBackground(cocos2d::CCObject*);
     void listenToForeground(cocos2d::CCObject*);
-    cocos2d::CCImage* newCCImage(bool) = m1 0x5117a4;
+    cocos2d::CCImage* newCCImage(bool) = m1 0x5117a4, imac 0x5deb40;
     bool saveToFile(char const*);
     bool saveToFile(char const*, cocos2d::eImageFormat);
     void updateInternalScale(float, float);
@@ -3156,8 +3156,8 @@ class cocos2d {
     static cocos2d::CCBMFontConfiguration* FNTConfigLoadFile(char const*) = m1 0x4f1f3c, imac 0x5bc460;
     static void FNTConfigRemoveCache();
     static cocos2d::CCAffineTransform __CCAffineTransformMake(float, float, float, float, float, float);
-    static cocos2d::CCPoint __CCPointApplyAffineTransform(cocos2d::CCPoint const&, cocos2d::CCAffineTransform const&);
-    static cocos2d::CCSize __CCSizeApplyAffineTransform(cocos2d::CCSize const&, cocos2d::CCAffineTransform const&);
+    static cocos2d::CCPoint __CCPointApplyAffineTransform(cocos2d::CCPoint const&, cocos2d::CCAffineTransform const&) = m1 0x1df1e8, imac 0x22e4c0;
+    static cocos2d::CCSize __CCSizeApplyAffineTransform(cocos2d::CCSize const&, cocos2d::CCAffineTransform const&) = m1 0x1df244, imac 0x22e530;
     static cocos2d::CCPoint ccCardinalSplineAt(cocos2d::CCPoint&, cocos2d::CCPoint&, cocos2d::CCPoint&, cocos2d::CCPoint&, float, float);
     static void ccDrawCardinalSpline(cocos2d::CCPointArray*, float, unsigned int);
     static void ccDrawCatmullRom(cocos2d::CCPointArray*, unsigned int);
@@ -3211,7 +3211,7 @@ class cocos2d {
     static float ccpAngleSigned(cocos2d::CCPoint const&, cocos2d::CCPoint const&);
     static cocos2d::CCPoint ccpClamp(cocos2d::CCPoint const&, cocos2d::CCPoint const&, cocos2d::CCPoint const&);
     static cocos2d::CCPoint ccpCompMult(cocos2d::CCPoint const&, cocos2d::CCPoint const&);
-    static float ccpDistance(cocos2d::CCPoint const&, cocos2d::CCPoint const&);
+    static float ccpDistance(cocos2d::CCPoint const&, cocos2d::CCPoint const&) = m1 0x2d8278, imac 0x342880;
     static cocos2d::CCPoint ccpForAngle(float);
     static cocos2d::CCPoint ccpFromSize(cocos2d::CCSize const&);
     static bool ccpFuzzyEqual(cocos2d::CCPoint const&, cocos2d::CCPoint const&, float);
@@ -3533,4 +3533,34 @@ class cocos2d::CCLightning : cocos2d::CCNode, cocos2d::CCRGBAProtocol {
     bool m_cascadeColorEnabled;
     bool m_cascadeOpacityEnabled;
     bool m_opacityModifyEnabled;
+}
+
+[[link(win, android)]]
+class cocos2d::CCConfiguration {
+	static void purgeConfiguration();
+	static cocos2d::CCConfiguration* sharedConfiguration() = m1 0x4634e8, imac 0x503d50;
+
+	bool init();
+
+	bool getBool(char const*, bool) const;
+	char const* getCString(char const*, char const*) const;
+	int getMaxModelviewStackDepth() const;
+	int getMaxTextureSize() const;
+	int getMaxTextureUnits() const;
+	double getNumber(char const*, double) const;
+	cocos2d::CCObject* getObject(char const*) const;
+
+	void setObject(char const*, cocos2d::CCObject*);
+
+	// CCConfiguration();
+	// CCConfiguration(cocos2d::CCConfiguration const&);
+	bool checkForGLExtension(gd::string const&) const;
+	void dumpInfo() const;
+	void gatherGPUInfo();
+	void loadConfigFile(char const*);
+	bool supportsBGRA8888() const;
+	bool supportsDiscardFramebuffer() const;
+	bool supportsNPOT() const;
+	bool supportsPVRTC() const;
+	bool supportsShareableVAO() const;
 }
