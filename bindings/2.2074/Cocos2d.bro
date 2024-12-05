@@ -634,7 +634,7 @@ class cocos2d::CCParticleRain : cocos2d::CCParticleSystemQuad {
 [[link(win, android)]]
 class cocos2d::CCParticleSnow : cocos2d::CCParticleSystemQuad {
 	static cocos2d::CCParticleSnow* create() = imac 0x473c10;
-	static cocos2d::CCParticleSnow* createWithTotalParticles(unsigned int) = imac 0x473c90;
+	static cocos2d::CCParticleSnow* createWithTotalParticles(unsigned int) = imac 0x473c90, m1 0x3e28a0;
 
 	// CCParticleSnow(cocos2d::CCParticleSnow const&);
 	// CCParticleSnow();
@@ -1441,7 +1441,7 @@ class cocos2d::CCEGLView {
     void end();
 
     [[missing(android, mac, ios)]]
-    void toggleFullScreen(bool, bool);
+    void toggleFullScreen(bool, bool, bool);
     [[missing(android, mac, ios)]]
     void pollEvents();
     [[missing(android, mac, ios)]]
@@ -1525,7 +1525,7 @@ class cocos2d::CCIMEDispatcher {
     bool attachDelegateWithIME(cocos2d::CCIMEDelegate*);
     bool detachDelegateWithIME(cocos2d::CCIMEDelegate*);
     void dispatchDeleteBackward() = m1 0x4124e0, imac 0x4a9140;
-    void dispatchDeleteForward();
+    void dispatchDeleteForward() = m1 0x412500, imac 0x4a9160;
     void dispatchInsertText(char const*, int, cocos2d::enumKeyCodes) = imac 0x4a9110, m1 0x4124b4;
     void dispatchKeyboardDidHide(cocos2d::CCIMEKeyboardNotificationInfo&);
     void dispatchKeyboardDidShow(cocos2d::CCIMEKeyboardNotificationInfo&);
