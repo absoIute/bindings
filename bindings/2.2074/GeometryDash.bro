@@ -5083,7 +5083,7 @@ class EditorUI : cocos2d::CCLayer, FLAlertLayerProtocol, ColorSelectDelegate, GJ
     void updateGroupIDLabel() = imac 0x2ccd0, win 0x11dac0, m1 0x2c844, ios 0x3ddd7c;
     void updateObjectInfoLabel() = ios 0x3dfae0, win 0xe17c0, m1 0x2f208, imac 0x2f870;
     void updatePlaybackBtn() = win 0x110850, m1 0x2d08c, imac 0x2d5f0, ios 0x3de490;
-    void updateSlider() = ios 0x3dca34, win 0xe14a0;
+    void updateSlider() = win 0xe14a0, m1 0x2b3c0, imac 0x2b1b0, ios 0x3dca34;
     TodoReturn updateSpecialUIElements();
     void updateZoom(float) = ios 0x3e6980, win 0x110ef0, m1 0x38b14, imac 0x3e050;
     float valueFromXPos(float);
@@ -7538,7 +7538,7 @@ class GameManager : GManager {
     TodoReturn switchCustomObjects(int, int);
     TodoReturn switchScreenMode(bool, bool, bool, bool);
     void syncPlatformAchievements();
-    void toggleGameVariable(char const*) = ios 0x319068, win 0x180270, imac 0x3707d0, m1 0x301b54;
+    bool toggleGameVariable(char const*) = ios 0x319068, win 0x180270, imac 0x3707d0, m1 0x301b54;
     TodoReturn tryCacheAd();
     TodoReturn tryShowInterstitial(int, int, int);
     TodoReturn unloadBackground();
@@ -14513,7 +14513,7 @@ class LevelEditorLayer : GJBaseGameLayer, LevelSettingsDelegate {
     TodoReturn getAllObjects();
     DelayedSpawnNode* getDelayedSpawnNode();
     TodoReturn getGridPos(cocos2d::CCPoint);
-    float getLastObjectX() = win 0x2d5fd0, m1 0xd44fc, imac 0xef3e0;
+    float getLastObjectX() = win 0x2d5fd0, m1 0xd44fc, imac 0xef3e0, ios 0x361490;
     gd::string getLevelString() = win 0x2ce530, m1 0xca93c, imac 0xe3a60, ios 0x35bcb8;
     TodoReturn getLockedLayers();
     int getNextColorChannel() = win 0x2d2890;
@@ -17932,7 +17932,11 @@ class PlayLayer : GJBaseGameLayer, CCCircleWaveDelegate, CurrencyRewardDelegate,
     void storeCheckpoint(CheckpointObject*) = ios 0x124a04, win 0x3a0610, m1 0xac964, imac 0xbdf30;
     TodoReturn takeStateSnapshot();
     TodoReturn toggleBGEffectVisibility(bool);
-    TodoReturn toggleDebugDraw(bool) = ios 0x11919c;
+    void toggleDebugDraw(bool) = win inline, m1 0x9d960, imac 0xacb60, ios 0x11919c {
+        m_isDebugDrawEnabled = p0;
+        m_debugDrawNode->clear();
+        m_debugDrawNode->setVisible(m_isDebugDrawEnabled && m_isPracticeMode);
+    }
     TodoReturn toggleGhostEffect(int);
     void toggleIgnoreDamage(bool value) = win inline, m1 0x9d9c8, imac 0xacbb0, ios 0x1191f4 {
         this->m_ignoreDamage = value;
@@ -17941,7 +17945,6 @@ class PlayLayer : GJBaseGameLayer, CCCircleWaveDelegate, CurrencyRewardDelegate,
         this->m_player2->m_maybeCanRunIntoBlocks = value;
         this->updateTestModeLabel();
     }
-    //void toggleDebugDraw(bool) = ios 0x11919c;
     void togglePracticeMode(bool practiceMode) = ios 0x125760, win 0x3a2f20, imac 0xbeca0, m1 0xad654;
     TodoReturn tryStartRecord();
     void updateAttempts() = win 0x3a2c70, imac 0xbeeb0, m1 0xad858, ios 0x1258d4;
